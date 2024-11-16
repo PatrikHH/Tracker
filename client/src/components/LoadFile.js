@@ -1,3 +1,15 @@
+/**
+ * Represents a data import component. 
+ * 
+ * @component
+ * @param {Object} props - The component props.
+ * @param onDataLoad - Stores the uploaded data.
+ * @param {ref} loadFileRef - Reference for "Import from NCI" button in Menu.js
+ * @param {boolean} props.isNight - Switcher for night view.
+ * @returns {React.ReactElement} A data import.
+ * 
+ */
+
 import "./LoadFile.css"
 import SweetAlert from "./SweetAlert"
 
@@ -52,11 +64,20 @@ const LoadFile = ({ onDataLoad, loadFileRef, isNight }) => {
         reader.readAsText(file)
     }
 
+    /**
+    * @onReset - Resets input for next import data.
+    */
     const onReset = () => {
         const input = document.getElementById("load-file")
         input.value = null
     }
 
+    /**
+    * @showAlert - Display alert.
+    * @param {string} text - Text of the alert. 
+    * @param {string} icon - Icon of the alert. 
+    * @param {string} title - Title of the alert. 
+    */
     const showAlert = (text, icon, title) => {
         SweetAlert.mixin({
             customClass: {

@@ -1,3 +1,7 @@
+/*
+* Imports and initializes the SweetAlert2.
+*/
+
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 

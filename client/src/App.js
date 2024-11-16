@@ -1,6 +1,20 @@
+/**
+ * Represents main component.
+ * 
+ * @component
+ * @variable (array) allMeasurements - All measurements present in the application.
+ * @variable (array) allMeasurementsHead - Names and starts of all measurements present in the application.
+ * @variable (array) allMeasurementsHeadInDb - Names and starts of all measurements stored in database present in the application.
+ * @variable (array) selectedMeasurement - Selected measurement to display data on map.
+ * @variable (string) selectedTitle - Name of the selected measuremnt.
+ * @variable (boolean) isNight - Switcher for night view.
+ * @variable (ref) loadFileRef - Reference for "Import from NCI" button in Menu.js
+ * @returns {React.ReactElement} A whole app.
+ */
+
 import "./App.css"
 import { useState, useEffect, useCallback, useRef } from "react"
-import MenuModal from "./components/MenuModal"
+import Menu from "./components/Menu"
 import DayNightButton from "./components/DayNightButton"
 import LoadFile from "./components/LoadFile"
 import ListOfMeasurements from "./components/ListOfMeasurements"
@@ -18,10 +32,11 @@ function App() {
   const [isNight, setIsNight] = useState(false)
   const loadFileRef = useRef(null)
 
-  const triggerLoadFileInput = () => {
-    loadFileRef.current.click()
-  }
-
+/**
+* @handleDataLoad - Stores the uploaded data.
+* @param {array} data - Imported data.
+* @param {string} titleMeasurement - Name of the uploaded file. 
+*/
   const handleDataLoad = useCallback((data, titleMeasurement) => {
     var time = null
     const title = titleValidation(titleMeasurement)
@@ -55,6 +70,9 @@ function App() {
     ])
   }, [allMeasurements])
 
+  /**
+  * @getMeasurements - Loads all data from the database.
+  */
   const getMeasurements = () => {
     axios.get("http://localhost/php/tracking_backend/?action=getAll").then((response) => {
       if (response.status === 200 && Object.keys(response.data).length > 0) {    
@@ -90,9 +108,19 @@ function App() {
       })
   }
 
-  const titleValidation = useCallback((title) => {
+  /**
+  * @titleValidation - Validates the name of the measurement.
+  * @param {string} title - Name of the uploaded file. 
+  */
+  const titleValidation = (title) => {
     if (!validNewTitle.test(title)) {
-      SweetAlert.fire({
+      const SAWithBootstrap = SweetAlert.mixin({
+        customClass: {
+          confirmButton: `btn ${isNight ? "confirm-button-night" : "confirm-button-day"}`
+        },
+        buttonsStyling: true
+      })
+      SAWithBootstrap.fire({
         title: "Your measurement is renamed!",
         color: `${isNight ? "var(--white-text)" : "var(--black)"}`,
         background: `${isNight ? "var(--light-night)" : "rgb(255, 255, 255)"}`,
@@ -101,7 +129,6 @@ function App() {
       })
       title = "Measurement"
     }
-
     let newTitle = title
     let countDuplicate = 1
     while (allMeasurements.hasOwnProperty(newTitle)) {
@@ -109,7 +136,14 @@ function App() {
       countDuplicate++
     }
     return newTitle
-  }, [allMeasurements])
+  }
+
+  /**
+  * @triggerLoadFileInput - Launches the file upload dialog.
+  */
+  const triggerLoadFileInput = () => {
+    loadFileRef.current.click()
+  }
 
   useEffect(() => {
     getMeasurements()
@@ -121,7 +155,10 @@ function App() {
 
   return (
     <div className={`background-app ${isNight ? "night" : ""}`}>
-      <MenuModal className="neco" onImport={triggerLoadFileInput} isNight={isNight} />
+      <Menu className="neco"
+        onImport={triggerLoadFileInput}
+        isNight={isNight}
+      />
       <div className={`container-app ${isNight ? "night" : ""}`}>
         <DayNightButton
           isNight={isNight}

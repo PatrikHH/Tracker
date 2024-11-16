@@ -1,3 +1,16 @@
+/**
+ * Represents a switch between day and night map component. 
+ * 
+ * @component
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isNight - Switcher for night view.
+ * 
+ * @variable (Object) map - Leaflet map instances.
+ * @variable (Object) nightLayer - A night layer of the map.
+ * @variable (Object) dayLayer - A day layer of the map.
+ * @variable (boolean) mapFirstRun - prevents the map from flashing when the map is first rendered.
+ */
+
 import { useState, useEffect } from "react"
 import { useMap } from 'react-leaflet'
 import L from 'leaflet'

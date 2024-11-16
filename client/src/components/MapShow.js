@@ -1,3 +1,19 @@
+/**
+ * Represents a map component. 
+ * 
+ * @component
+ * @param {Object} props - The component props.
+ * @param {array} selectedMeasurement - Selected measurement to display data on map.
+ * @param setSelectedMeasurement - Sets selected measurement.
+ * @param {string} props.selectedTitle - Name of the selected measurement.
+ * @param setSelectedTitle Sets name of the selected measurement.
+ * @param {boolean} props.isNight - Switcher for night view.
+ * @returns {React.ReactElement} A map in the application.
+ * 
+ * @variable (Object) defaultCoordinates - Default coordinates for centering map.
+ * @variable (Object) coordinates - Coordinates for centering map.
+ */
+
 import "./MapShow.css"
 import CenterMapOnCoordinates from "./CenterMapOnCoordinates"
 import LayerTransition from "./LayerTransition"
@@ -18,13 +34,19 @@ const MapShow = ({ selectedMeasurement, setSelectedMeasurement, selectedTitle, s
     const defaultCoordinates = { latitude: 49.2223267, longitude: 16.5849728 }
     const [coordinates, setCoordinates] = useState(defaultCoordinates)
 
+    /**
+    * @clearMap - Clears markers from the map.
+    */
     const clearMap = () => {
         setCoordinates(defaultCoordinates)
         setSelectedMeasurement([])
         setSelectedTitle("")
     }
 
-    function applyZoomHoverStyles() {
+    /**
+    * @applyZoomHoverStyles - Styles the zoom buttons on the map.
+    */
+    const applyZoomHoverStyles = () => {
         const signs = document.querySelector('.leaflet-bar a')
         const zoomInButton = document.querySelector('.leaflet-control-zoom-in')
         const zoomOutButton = document.querySelector('.leaflet-control-zoom-out')

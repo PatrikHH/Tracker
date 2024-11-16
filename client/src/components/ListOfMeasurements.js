@@ -1,3 +1,26 @@
+/**
+ * Represents a list of all measurements component.
+ * 
+ * @component
+ * @param {Object} props - The component props.
+ * @param {array} props.allMeasurements - All measurements present in the application.
+ * @param props.setAllMeasurements - Sets all measurements.
+ * @param {array} props.allMeasurementsHead - Names and starts of all measurements present in the application.
+ * @param props.setAllMeasurementsHead - Sets names and starts of all measurements.
+ * @param {array} props.selectedMeasurement - Selected measurement to display data on map.
+ * @param props.setSelectedMeasurement - Sets selected measurement.
+ * @param props.setSelectedTitle - Sets name of the selected measuremnt.
+ * @param props.allMeasurementsHeadInDb - Names and starts of all measurements stored in database present in the application.
+ * @param props.setAllMeasurementsHeadInDb - Sets Names and starts of all measurements stored in database in the application.
+ * @param {boolean} props.isNight - Switcher for night view.
+ * @returns {React.ReactElement} A list of all measurements.
+ * 
+ * @variable (boolean) isModalOpen - Switcher for opening modal window.
+ * @variable (string) currentTitle - Current name of the measurement.
+ * @variable (string) newTitle - New name of the measurement.
+ * @variable (string) error - Error during renaming of the measurement.
+ */
+
 import "./ListOfMeasurements.css"
 import MeasurementRenameButton from "./MeasurementRenameButton"
 import MeasurementAddToDbButton from "./MeasurementAddtoDbButton"
@@ -14,11 +37,19 @@ const ListOfMeasurements = ({ allMeasurements, setAllMeasurements, allMeasuremen
     const [newTitle, setNewTitle] = useState("")
     const [error, setError] = useState(" ")
 
+    /**
+    * @openModal - Opens modal window for renaming measurement.
+    * @param {string} title - Name of the measurement. 
+    */
     const openModal = useCallback((title) => {
         setCurrentTitle(title)
         setIsModalOpen(true)
     }, [])
 
+    /**
+    * @selectMeasurement - Sets selected measurement after clicking on the card of measurement.
+    * @param {string} title - Name of the measurement.
+    */
     const selectMeasurement = useCallback((title) => {
         if (selectedMeasurement === allMeasurements[title]) {
             setSelectedMeasurement([])
@@ -30,6 +61,9 @@ const ListOfMeasurements = ({ allMeasurements, setAllMeasurements, allMeasuremen
         }
     }, [allMeasurements, setSelectedMeasurement, selectedMeasurement])
 
+    /**
+    * @handleRename - Renames measurement.
+    */
     const handleRename = () => {
         const updatedMeasurementsHead = allMeasurementsHead.map((measurement) => {
             if (measurement.title === currentTitle)
@@ -68,6 +102,10 @@ const ListOfMeasurements = ({ allMeasurements, setAllMeasurements, allMeasuremen
             setError(" ")
     }
 
+    /**
+    * @handleAddToDb - Adds measurements to the database.
+    * @param {string} title - Name of the measurement.
+    */
     const handleAddToDb = (title) => {
         axios.post("http://localhost/php/tracking_backend/", {
             title: title,
@@ -80,6 +118,9 @@ const ListOfMeasurements = ({ allMeasurements, setAllMeasurements, allMeasuremen
         setAllMeasurementsHeadInDb((prevState) => [...prevState, newDataHeadInDb])
     }
 
+    /**
+    * @checkName - Checks the entered new measurement name.
+    */
     const checkName = () => {
         const restrictedWords = [
             "select", "from", "where", "insert", "update", "delete", "table", "join",
@@ -120,6 +161,10 @@ const ListOfMeasurements = ({ allMeasurements, setAllMeasurements, allMeasuremen
         }
     }
 
+    /**
+    * @handleDelete - Deletes measurement from the database.
+    * @param {string} title - Name of the measurement.
+    */
     const handleDelete = (title) => {
         const SAWithBootstrap = SweetAlert.mixin({
             customClass: {
@@ -173,6 +218,10 @@ const ListOfMeasurements = ({ allMeasurements, setAllMeasurements, allMeasuremen
         })
     }
 
+    /**
+    * @showAlert - Display alert.
+    * @param {string} response - Response from backend.
+    */
     const showAlert = (response) => {
         const miniInfo = SweetAlert.mixin({
             toast: true,
@@ -217,7 +266,7 @@ const ListOfMeasurements = ({ allMeasurements, setAllMeasurements, allMeasuremen
                             <div key={title} className={`one-measurement ${isNight ? "one-measurement-night" : "one-measurement-day"} ${selectedMeasurement === allMeasurements[title] ? (isNight ? "selected-measurement-night": "selected-measurement-day") : ""}`} onClick={() => selectMeasurement(title)}> 
                                 <h3 className={`title ${isNight ? "night-text" : "day-text"}`}>{title}</h3>
                                 <p className={`${isNight ? "night-text" : "day-text"}`}>{new Date(time).toLocaleString()}</p>
-                                <MeasurementRenameButton        openModal={(e) => {
+                                <MeasurementRenameButton openModal={(e) => {
                                     e.stopPropagation()
                                     openModal(title)
                                 }}

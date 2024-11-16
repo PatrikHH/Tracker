@@ -64,7 +64,7 @@ body {
 }
 
 .confirm-button-day {
-  background-color: var(--yellow);
+  background-color: var(--yellow) !important;
   border: none !important;
   color: var(--black);
   transition: var(--switch-time);

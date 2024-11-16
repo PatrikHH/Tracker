@@ -1,3 +1,13 @@
+/**
+ * Represents a switch between day and night view component. 
+ * 
+ * @component
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isNight - Switcher for night view.
+ * @param props.isNight - Sets night view.
+ * @returns {React.ReactElement} A day/night view button.
+ */
+
 import "./DayNightButton.css"
 
 const DayNightButton = ({isNight, setIsNight}) => {

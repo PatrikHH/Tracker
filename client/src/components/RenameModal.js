@@ -1,3 +1,23 @@
+/**
+ * Represents a modal window for renaming measurement component.
+ * 
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.currentTitle  - Current name of the measurement.
+ * @param {string} props.newTitle - New name of the measurement.
+ * @param props.setNewTitle - Sets new name of the measurent.
+ * @param props.renameMeasuremen - Function for renaming measurement.
+ * @param {boolean} props.isModalOpen - Switcher for opening modal window.
+ * @param props.closeModal - Closes modal window and deletes nameing error.
+ * @param {string} props.error - Error during renaming of the measurement.
+ * @param {boolean} props.isNight - Switcher for night view.
+ * @returns {React.ReactElement} A modal window for renaming measurement.
+ * 
+ * @variable (boolean) isClosing - Modal window is closing.
+ * @variable (string) classForInput - Styles the input for renaming the measurement.
+ * @variable (boolean) validationFirstRun - Prevents validation of the new measurement name when opening the modal window.
+ */
+
 import './RenameModal.css'
 import {useState, useEffect} from "react"
 import Button from 'react-bootstrap/Button'
@@ -8,6 +28,11 @@ const RenameModal = ({ currentTitle, newTitle, setNewTitle, renameMeasurement, i
     const [isClosing, setIsClosing] = useState(false)
     const [classForInput, setClassForInput] = useState("form-control")
     const [validationFirstRun, setValidationFirstRun] = useState(true)
+
+    /**
+    * @handleCloseWithAnimation - Animates modal window closing and deletes nameing error.
+    * @param onCloseCallback - Content is "renameMeasurement" (renames the measurement)
+    */
     const handleCloseWithAnimation = (onCloseCallback) => {
         setIsClosing(true)
         setTimeout(() => {
@@ -62,6 +87,6 @@ const RenameModal = ({ currentTitle, newTitle, setNewTitle, renameMeasurement, i
     )
 }
 
-export default RenameModal             
+export default RenameModal           
 
 
