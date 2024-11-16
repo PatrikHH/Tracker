@@ -25,6 +25,8 @@ switch ($method) {
         break;
 }
 
+// handleGet - Reads all data from the database.
+// $database - Connected database.
 function handleGet($database) {
     $action = $_GET['action'] ?? '';
 
@@ -52,6 +54,8 @@ function handleGet($database) {
     }
 }
 
+// renameTable - Renames the measurement table in the database.
+// $database - Connected database.
 function renameTable($database, $currentTitle, $newTitle) {
     $data = ['status' => 0, 'message' => "'$currentTitle' has not been renamed."];  
 
@@ -71,6 +75,8 @@ function renameTable($database, $currentTitle, $newTitle) {
     sendResponse($data);
 }
 
+// handlePost - Adds a measurement table in the database.
+// $database - Connected database.
 function handlePost($database) {
     $measurementData = json_decode(file_get_contents('php://input'));
         $measurements = $measurementData->measurement;
@@ -130,6 +136,8 @@ function handlePost($database) {
         sendResponse($data); 
 }
 
+// handlePost - Deletes the measurement table in the database.
+// $database -Connected database.
 function handleDelete($database) {
         $title = basename($_SERVER['REQUEST_URI']);
         $data = ['status' => 0, 'message' => "'$title' the measurement has not been deleted."];
@@ -150,6 +158,8 @@ function handleDelete($database) {
         sendResponse($data);
 }
 
+// sendResponse - Sends the response to the frontend after the perfomed action.
+// $data - Content of the answer.
 function sendResponse($data) {
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;
