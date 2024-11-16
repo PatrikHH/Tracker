@@ -1,0 +1,14 @@
+:root {
+    --red: rgb(255, 0, 0);
+    --red-delete: rgb(211, 11, 11);
+    --yellow: rgb(255, 241, 179);
+    --black: rgb(0, 0, 0); 
+    --select-measurement-day: rgb(174, 255, 255); 
+    --select-measurement-night: rgb(134, 136, 0);
+    --dark-night: rgb(29, 29, 29);
+    --light-night: rgb(38, 38, 38);
+    --white-text: rgb(216, 217, 217);
+    --light-green: rgb(0, 171, 100);
+    --dark-green: rgb(16, 78, 55);
+    --switch-time: 0.5s;
+}

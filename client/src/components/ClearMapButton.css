@@ -1,0 +1,25 @@
+.clear-button-day {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    color: var(--black) !important;
+    background-color: var(--yellow) !important;
+    border: none !important;
+    transition: var(--switch-time) !important;
+}
+
+.clear-button-day:hover {
+    background-color: var(--red) !important;
+}
+
+.clear-button-night {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    color: var(--white-text) !important;
+    background-color: var(--dark-green) !important;
+    border: none !important;
+    transition: var(--switch-time) !important;
+}
+
+.clear-button-night:hover {
+    background-color: var(--light-green) !important;
+}

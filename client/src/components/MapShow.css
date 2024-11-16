@@ -1,0 +1,35 @@
+.map-container {
+    position: relative;
+}
+
+.legend {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 1000;  
+}
+
+.legend-night {
+    background-color: var(--select-measurement-night);
+    color: var(--white-text);
+}
+
+.legend-day {
+    background-color: var(--select-measurement-day);
+    color: var(--black);
+}
+
+.hide-tooltip {
+    visibility: hidden;
+}
+
+.leaflet-bar {
+    border: none !important;
+}
+
+
+

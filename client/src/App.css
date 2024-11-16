@@ -1,0 +1,76 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  color: var(--black);
+  font-family: "HelveticaNeueMedium", sans-serif;
+  font-size: 12pt;
+}
+
+.container-app {
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+  transition: var(--switch-time);
+}
+
+@media (max-width: 576px) {
+  .container-app {
+    max-width: 95%;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 1199px) {
+  .container-app {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-app {
+    max-width: 80%;
+
+  }
+}
+
+.background-app {
+  background-color: rgb(255, 255, 255);
+  transition: var(--switch-time);
+}
+
+.night
+{
+  background-color: var(--dark-night);
+}
+
+.html-day {
+  background-color: rgb(255, 255, 255);
+  transition: var(--switch-time);
+}
+
+.html-night {
+  background-color: var(--dark-night);
+  transition: var(--switch-time);
+}
+
+.confirm-button-night{
+  background-color: var(--dark-green);
+  border: none !important;
+  color: var(--white-text);
+  transition: var(--switch-time);
+}
+
+.confirm-button-night:hover {
+  border: 1px solid var(--light-green);
+  background-color: var(--light-green);
+}
+
+.confirm-button-day {
+  background-color: var(--yellow);
+  border: none !important;
+  color: var(--black);
+  transition: var(--switch-time);
+}
+
+.confirm-button-day:hover {
+  background-color: var(--red);
+  border: 1px solid var(--red);
+}
