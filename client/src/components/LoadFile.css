@@ -23,18 +23,17 @@
     outline: 1px solid var(--black);
     color: var(--black);
     background-color: var(--yellow);
-    border: 1px solid var(--yellow);
+    border: none;
     transition: var(--switch-time);
 }
 
 .load-button-day::file-selector-button:hover {
     background-color: var(--red); 
-    border: 1px solid var(--red);
 }
 
 .load-button-night {
     position: relative;
-    border: 1.5px solid var(--white-text);
+    border: 1px solid var(--white-text);
     border-radius: 0.3125rem;
     color: var(--white-text);
     transition: var(--switch-time);
@@ -52,7 +51,6 @@
     background-color: var(--dark-green);   
     border: none;
     transition: var(--switch-time);
-
 }
 
 .load-button-night::file-selector-button:hover {
